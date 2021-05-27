@@ -2,7 +2,7 @@
 
 #Created by Jeremy Zimmerman (stopspazzing.com)
 
-## Description - This script is to migrate Active Directory Controllers. Support for 2003 up.
+## Description - This script is to migrate Active Directory Controllers. Support for 2012+
 
 ## Process - 
 
@@ -20,7 +20,7 @@
 
 ## 7. Demote server from AD DC
 
-## 8. Disable all AD DS and extra services which were migrated.
+## 8. Disable all AD DS and extra services which were migrated. Required/Suggested/Recommended?
 
 ## 9. Remove AD DS Windows Feature
 
@@ -30,7 +30,7 @@
 
  
 
-## TODO ##
+#Step 1 - ## TODO ##
 
 #Check old Server version to verify if need to migrate to DFS:
 
@@ -39,14 +39,11 @@
 ## ##
 
  
-
-#start by making sure everything is setup
+#Step 2a - start by making sure everything is setup
 
 Install-WindowsFeature –Name AD-Domain-Services -IncludeManagementTools
 
-## TODO ##
-
-#Get Domain Name first
+#Step 2b - ## TODO ## - #Get Domain Name, join domain, promote to DC
 
 #ask for domain information/pull domain name automatically and save to variable
 
@@ -56,7 +53,7 @@ $hostName = hostname
 
  
 
-#Migrate roles to new domain controller:
+#Step 3 - Migrate roles to new domain controller:
 
 Move-ADDirectoryServerOperationMasterRole -Identity $hostName -OperationMasterRole SchemaMaster, DomainNamingMaster, PDCEmulator, RIDMaster, InfrastructureMaster
 
